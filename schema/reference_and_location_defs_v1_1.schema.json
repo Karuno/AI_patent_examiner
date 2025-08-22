@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reference_and_location_defs",
+  "version": "1.1",
+  "generated_on": "2025-08-22",
+  "$id": "https://karuno.ai/schema/reference_and_location_defs_v1_1.json",
+  "$defs": {
+    "span": {
+      "type": "object",
+      "required": [
+        "from"
+      ],
+      "properties": {
+        "from": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "to": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "location": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "para",
+            "figure",
+            "claim",
+            "table",
+            "column_line",
+            "page_line",
+            "old_page_corner_line"
+          ]
+        },
+        "spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/span"
+          }
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "corner": {
+          "type": "string",
+          "enum": [
+            "upper_left",
+            "upper_right",
+            "lower_left",
+            "lower_right"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "para"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "spans"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "figure"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "spans"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "claim"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "spans"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "table"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "spans"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "column_line"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "column",
+              "line"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "page_line"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "page",
+              "line"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "old_page_corner_line"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "page",
+              "corner",
+              "line"
+            ]
+          }
+        }
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "ref_type"
+      ],
+      "properties": {
+        "ref_type": {
+          "type": "string",
+          "enum": [
+            "patent_jp",
+            "patent_other",
+            "non_patent",
+            "web",
+            "standard",
+            "other"
+          ]
+        },
+        "jurisdiction": {
+          "type": "string"
+        },
+        "publication_no": {
+          "type": "string"
+        },
+        "kind_code": {
+          "type": "string"
+        },
+        "application_no": {
+          "type": "string"
+        },
+        "publication_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "journal": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1800,
+          "maximum": 2100
+        },
+        "volume": {
+          "type": "string"
+        },
+        "pages": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "doi": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

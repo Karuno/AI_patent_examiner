@@ -1,0 +1,135 @@
+{
+  "case_id": "2025-DEMO-0002",
+  "meta": {
+    "jurisdiction": "JP",
+    "compiled_on": "2025-08-22",
+    "source": "demo"
+  },
+  "conclusions": [
+    {
+      "claim": 1,
+      "article": "29_1_3",
+      "decision": "reject",
+      "summary": "D1でA〜Cが充足（段落・請求項・図で特定）。",
+      "main_prior_art": {
+        "ref": {
+          "ref_type": "patent_jp",
+          "jurisdiction": "JP",
+          "publication_no": "特開2018-111111",
+          "kind_code": "A",
+          "title": "〇〇装置",
+          "id": "D1"
+        },
+        "locations": [
+          {
+            "kind": "para",
+            "spans": [
+              {
+                "from": 12,
+                "to": 14
+              }
+            ]
+          },
+          {
+            "kind": "claim",
+            "spans": [
+              {
+                "from": 1
+              }
+            ]
+          },
+          {
+            "kind": "figure",
+            "spans": [
+              {
+                "from": 3
+              }
+            ]
+          }
+        ]
+      },
+      "template_hint_ids": [
+        "29_1_3.block_conclusion.v1"
+      ]
+    },
+    {
+      "claim": 2,
+      "article": "29_2",
+      "decision": "reject",
+      "summary": "相違点Xは設計的事項。古い公報の記載（第3頁右上欄第12行）等により補強。",
+      "main_prior_art": {
+        "ref": {
+          "ref_type": "patent_jp",
+          "jurisdiction": "JP",
+          "publication_no": "特開2017-222222",
+          "kind_code": "A",
+          "title": "△△方法",
+          "id": "D1"
+        },
+        "locations": [
+          {
+            "kind": "para",
+            "spans": [
+              {
+                "from": 30
+              }
+            ]
+          }
+        ]
+      },
+      "difference_from_main": "要素X（閾値設定）",
+      "secondary_priors": [
+        {
+          "ref": {
+            "ref_type": "patent_other",
+            "jurisdiction": "US",
+            "publication_no": "US20170000000A1",
+            "title": "Method of ...",
+            "id": "D2"
+          },
+          "locations": [
+            {
+              "kind": "old_page_corner_line",
+              "page": 3,
+              "corner": "upper_right",
+              "line": 12
+            }
+          ]
+        },
+        {
+          "ref": {
+            "ref_type": "web",
+            "url": "https://example.com/tech-note",
+            "title": "Tech Note: Threshold Tuning",
+            "id": "D3"
+          },
+          "locations": [
+            "Section 2.1 Figure 3"
+          ]
+        }
+      ],
+      "rationale": [
+        {
+          "category": "combination",
+          "description": "D1にD2の例を適用",
+          "links_to_secondary_priors": [
+            "D2"
+          ],
+          "template_hint_ids": [
+            "combo.apply_example.v1"
+          ]
+        },
+        {
+          "category": "design_choice_uncited",
+          "description": "閾値は設計的事項",
+          "template_hint_ids": [
+            "design_choice.uncited.v1"
+          ]
+        }
+      ],
+      "template_hint_ids": [
+        "29_2.block_conclusion.v1"
+      ]
+    }
+  ]
+}
