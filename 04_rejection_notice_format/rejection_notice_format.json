@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "name": "拒絶理由通知書_統一フォーマット",
+    "version": "0.4",
+    "generated_on": "2025-08-22",
+    "language": "ja"
+  },
+  "conclusion_templates": {},
+  "phrase_bank": {
+    "subblock": {
+      "prior_art_finding": [],
+      "comparison": [],
+      "difference": [],
+      "difference_assessment": [],
+      "mini_conclusion": []
+    }
+  }
+}
