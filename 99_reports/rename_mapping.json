@@ -1,0 +1,155 @@
+{
+  "generated_on": "2025-08-22",
+  "mapping": [
+    {
+      "source": "01_criteria_json/29_1_3_novelty.json",
+      "target": "01_criteria_json/29_1_3_novelty.json",
+      "size": 2563,
+      "sha256": "bfee4a738c04333807371bb5efb6f0a65f77d03864144bc2e3ebb8af82711bae"
+    },
+    {
+      "source": "01_criteria_json/29_2_inventive_step.json",
+      "target": "01_criteria_json/29_2_inventive_step.json",
+      "size": 2606,
+      "sha256": "011d4e18d419abca0fed9f620599be47b57e76cbc20fd60769ce50752d3a70d1"
+    },
+    {
+      "source": "01_criteria_json/36_6_2_clarity.json",
+      "target": "01_criteria_json/36_6_2_clarity.json",
+      "size": 7088,
+      "sha256": "c697cfff64f51667fdc5e99e96648b94a83ed43f5b83d0c3ec303324727e0e1a"
+    },
+    {
+      "source": "01_criteria_json/36_6_1_support.json",
+      "target": "01_criteria_json/36_6_1_support.json",
+      "size": 2842,
+      "sha256": "3cfc9cc806a1c88359e5bfd8b941efc57e315f0538912035e4a06c666a110ae5"
+    },
+    {
+      "source": "01_criteria_json/37_unity.json",
+      "target": "01_criteria_json/37_unity.json",
+      "size": 7832,
+      "sha256": "eb470c79b881fedba4216d9b03438b9e6118aab5d4d0c51425f263d899def2e4"
+    },
+    {
+      "source": "01_criteria_json/crosscut_concepts.json",
+      "target": "01_criteria_json/crosscut_concepts.json",
+      "size": 1840,
+      "sha256": "691f92e5141c936754e792b9e0f245502c8304f004a653754707454285bf1041"
+    },
+    {
+      "source": "02_phrase_bank/mined_phrases.json",
+      "target": "02_phrase_bank/mined_phrases.json",
+      "size": 125,
+      "sha256": "26ae3a7bbe86769d6d05b03aa09b1875711b9d836ee12a7fbb016d6458e3ee6f"
+    },
+    {
+      "source": "03_case_digest/case_digest_2023_195926_structured.json",
+      "target": "03_case_digest/case_digest_2023_195926_structured.json",
+      "size": 3261,
+      "sha256": "82ac605bbd90234a366d36ba9c259f60e02b9b6b47c7d26710c0aa3228147410"
+    },
+    {
+      "source": "03_case_digest/case_digest_schema.json",
+      "target": "schema/case_digest_schema.json",
+      "size": 9298,
+      "sha256": "6559f4c2b1a6aebfc2d6e44d2c68436872b3770235e9a7d52b806039875a7548"
+    },
+    {
+      "source": "03_case_digest/case_digest_conclusion_example_v1_3_1.json",
+      "target": "03_case_digest/case_digest_conclusion_example.json",
+      "size": 3199,
+      "sha256": "4805b94ea0d74f5c55279c8fc06e1273986f546f7a2c55e452f62e0a76ff3302"
+    },
+    {
+      "source": "04_rejection_notice_format/rejection_notice_format.json",
+      "target": "04_rejection_notice_format/rejection_notice_format.json",
+      "size": 378,
+      "sha256": "8586c0ea072c1882422495c767db59250f52cb26faf36c1cf4c365da71e8f030"
+    },
+    {
+      "source": "04_rejection_notice_format/rejection_notice_format_schema.json",
+      "target": "schema/rejection_notice_format_schema.json",
+      "size": 7198,
+      "sha256": "c21f1ef745ff3019fe482d77e890424374917fdc97cbc6698f12bafff4e23869"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/02_phrase_bank/mined_phrases.json",
+      "target": "02_phrase_bank/mined_phrases_639c7176.json",
+      "size": 125,
+      "sha256": "26ae3a7bbe86769d6d05b03aa09b1875711b9d836ee12a7fbb016d6458e3ee6f"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/10_case_digest_samples/case_digest_2023_195926_structured.json",
+      "target": "03_case_digest/case_digest_2023_195926_structured_a83c6d19.json",
+      "size": 3261,
+      "sha256": "82ac605bbd90234a366d36ba9c259f60e02b9b6b47c7d26710c0aa3228147410"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/10_case_digest_samples/case_digest_schema.json",
+      "target": "schema/case_digest_schema_646952b3.json",
+      "size": 9298,
+      "sha256": "6559f4c2b1a6aebfc2d6e44d2c68436872b3770235e9a7d52b806039875a7548"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/03_rejection_notice_format/rejection_notice_format.json",
+      "target": "04_rejection_notice_format/rejection_notice_format_140ea287.json",
+      "size": 378,
+      "sha256": "8586c0ea072c1882422495c767db59250f52cb26faf36c1cf4c365da71e8f030"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/03_rejection_notice_format/rejection_notice_format_schema.json",
+      "target": "schema/rejection_notice_format_schema_2a47c0ea.json",
+      "size": 7198,
+      "sha256": "c21f1ef745ff3019fe482d77e890424374917fdc97cbc6698f12bafff4e23869"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/29_1_3_novelty.json",
+      "target": "01_criteria_json/29_1_3_novelty_d7ef0eb2.json",
+      "size": 2563,
+      "sha256": "bfee4a738c04333807371bb5efb6f0a65f77d03864144bc2e3ebb8af82711bae"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/29_2_inventive_step.json",
+      "target": "01_criteria_json/29_2_inventive_step_dd532d96.json",
+      "size": 2606,
+      "sha256": "011d4e18d419abca0fed9f620599be47b57e76cbc20fd60769ce50752d3a70d1"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/36_6_2_clarity.json",
+      "target": "01_criteria_json/36_6_2_clarity_54062e17.json",
+      "size": 7088,
+      "sha256": "c697cfff64f51667fdc5e99e96648b94a83ed43f5b83d0c3ec303324727e0e1a"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/36_6_1_support.json",
+      "target": "01_criteria_json/36_6_1_support_3e3d88a4.json",
+      "size": 2842,
+      "sha256": "3cfc9cc806a1c88359e5bfd8b941efc57e315f0538912035e4a06c666a110ae5"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/37_unity.json",
+      "target": "01_criteria_json/37_unity_94629196.json",
+      "size": 7832,
+      "sha256": "eb470c79b881fedba4216d9b03438b9e6118aab5d4d0c51425f263d899def2e4"
+    },
+    {
+      "source": "drive_snapshot/AI_examiner/01_criterias/crosscut_concepts.json",
+      "target": "01_criteria_json/crosscut_concepts_dcd84788.json",
+      "size": 1840,
+      "sha256": "691f92e5141c936754e792b9e0f245502c8304f004a653754707454285bf1041"
+    },
+    {
+      "source": "schema/case_digest_conclusion_v1_3_1.schema.json",
+      "target": "schema/case_digest_conclusion_v1_3_1.schema.json",
+      "size": 12668,
+      "sha256": "f2dcac1fe1305c98a56a6a3fadc6abe53ba784a8954117248cd7859c6807ca98"
+    },
+    {
+      "source": "schema/reference_and_location_defs_v1_1.schema.json",
+      "target": "schema/reference_and_location_defs_v1_1.schema.json",
+      "size": 5067,
+      "sha256": "70f1f659202081d27315fd7391d9d7afbd94b47c95537d09396d38bed6e8e54e"
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "rejection_notice_format_schema",
+    "version": "0.3-draft",
+    "generated_on": "2025-08-21",
+    "type": "object",
+    "required": [
+      "meta",
+      "structure",
+      "tables",
+      "styling_guidelines",
+      "conclusion_templates"
+    ],
+    "properties": {
+      "meta": {
+        "type": "object",
+        "required": [
+          "name",
+          "version",
+          "language"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        }
+      },
+      "structure": {
+        "type": "object",
+        "required": [
+          "reason_blocks",
+          "reason_block_template",
+          "sub_block_template",
+          "final_sections"
+        ],
+        "properties": {
+          "reason_blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "order",
+                "type",
+                "title"
+              ],
+              "properties": {
+                "order": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "unity",
+                    "support_or_clarity",
+                    "novelty_inventive_step",
+                    "inventive_step"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "reason_block_template": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "claim_set": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "prior_arts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "sub_blocks": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "conclusion": {
+                "type": "string"
+              }
+            }
+          },
+          "sub_block_template": {
+            "type": "object",
+            "required": [
+              "claims",
+              "prior_arts",
+              "steps"
+            ],
+            "properties": {
+              "claims": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "prior_arts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "steps": {
+                "type": "object",
+                "required": [
+                  "prior_art_finding",
+                  "comparison",
+                  "difference",
+                  "difference_assessment"
+                ],
+                "properties": {
+                  "prior_art_finding": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "art",
+                        "loc",
+                        "text"
+                      ],
+                      "properties": {
+                        "art": {
+                          "type": "string"
+                        },
+                        "loc": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "claim_interpretation": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "comparison": {
+                    "type": "string"
+                  },
+                  "difference": {
+                    "type": "string"
+                  },
+                  "secondary_findings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "difference_assessment": {
+                    "type": "string"
+                  },
+                  "mini_conclusion": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additional_notes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "claims",
+                    "text"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "same_as",
+                        "short_explanation"
+                      ]
+                    },
+                    "claims": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "final_sections": {
+            "type": "object",
+            "required": [
+              "non_rejected_claims",
+              "prior_art_list"
+            ],
+            "properties": {
+              "non_rejected_claims": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "prior_art_list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "tables": {
+        "type": "object"
+      },
+      "styling_guidelines": {
+        "type": "object"
+      },
+      "conclusion_templates": {
+        "type": "object",
+        "properties": {
+          "37": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "36_6_1": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "36_6_2": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "29_1_3": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "29_2": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
