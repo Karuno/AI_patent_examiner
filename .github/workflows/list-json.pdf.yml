@@ -1,47 +1,69 @@
-- name: Generate URL list (path, blob URL, raw URL)
-  shell: bash
-  run: |
-    set -euo pipefail
-    REF="${GITHUB_SHA}"
-    REPO="${GITHUB_REPOSITORY}"
-    OUT_DIR="docs"
-    OUT_TSV="${OUT_DIR}/json-pdf-urls.tsv"
-    mkdir -p "$OUT_DIR"
-    : > "$OUT_TSV"
+name: Build JSON/PDF URL index
 
-    # .json / .pdf を列挙
-    mapfile -d '' files < <(find . -type f \( -iname '*.json' -o -iname '*.pdf' \) -print0)
-    for f in "${files[@]:-}"; do
-      rel="${f#./}"
-      blob="https://github.com/${REPO}/blob/${REF}/${rel}"
-      raw="https://raw.githubusercontent.com/${REPO}/${REF}/${rel}"
-      printf "%s\t%s\t%s\n" "$rel" "$blob" "$raw" >> "$OUT_TSV"
-    done
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+    paths:
+      - '**.json'
+      - '**.pdf'
+      - '.github/workflows/list-json-pdf.yml'
+  workflow_dispatch: {} 
 
-    echo "Found ${#files[@]:-0} files"
-    echo "Output -> $OUT_TSV"
-    head -n 10 "$OUT_TSV" || true
+permissions:
+  contents: write
 
-- name: Commit & push if changed (force add; handle .gitignore)
-  shell: bash
-  run: |
-    set -euo pipefail
-    OUT_TSV="docs/json-pdf-urls.tsv"
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-    # 参考: 無視されていないか表示
-    git check-ignore -v "$OUT_TSV" || true
+      - name: Generate URL list (path, blob URL, raw URL)
+        shell: bash
+        run: |
+          set -euo pipefail
+          REF="${GITHUB_SHA}"
+          REPO="${GITHUB_REPOSITORY}"
+          OUT_DIR="docs"
+          OUT_TSV="${OUT_DIR}/json-pdf-urls.tsv"
+          mkdir -p "$OUT_DIR"
+          : > "$OUT_TSV"
 
-    git config user.name  "github-actions[bot]"
-    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # .json / .pdf を列挙
+          mapfile -d '' files < <(find . -type f \( -iname '*.json' -o -iname '*.pdf' \) -print0)
+          for f in "${files[@]:-}"; do
+            rel="${f#./}"
+            blob="https://github.com/${REPO}/blob/${REF}/${rel}"
+            raw="https://raw.githubusercontent.com/${REPO}/${REF}/${rel}"
+            printf "%s\t%s\t%s\n" "$rel" "$blob" "$raw" >> "$OUT_TSV"
+          done
 
-    # 無視されていても強制追加
-    git add -f "$OUT_TSV"
+          echo "Found ${#files[@]:-0} files"
+          echo "Output -> $OUT_TSV"
+          head -n 10 "$OUT_TSV" || true
 
-    # ステージ済みの差分で判定
-    if git diff --staged --quiet; then
-      echo "No changes to commit."
-      exit 0
-    fi
+      - name: Commit & push if changed (force add; handle .gitignore)
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT_TSV="docs/json-pdf-urls.tsv"
 
-    git commit -m "chore(ci): update JSON/PDF URL index [skip ci]"
-    git push
+          # 参考: 無視されていないか表示
+          git check-ignore -v "$OUT_TSV" || true
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 無視されていても強制追加
+          git add -f "$OUT_TSV"
+
+          # ステージ済みの差分で判定
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore(ci): update JSON/PDF URL index [skip ci]"
+          git push
