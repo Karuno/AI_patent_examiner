@@ -1,2 +1,17 @@
+# 統一改行（JSON/YAML/Markdown は LF）
 *.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.md   text eol=lf
+
+# 既定：テキスト自動判定
 * text=auto
+
+# JSON の差分を読みやすく
+*.json diff
+
+# バイナリはそのまま
+*.pdf  binary
+*.zip  binary
+*.xlsx binary
+*.docx binary
