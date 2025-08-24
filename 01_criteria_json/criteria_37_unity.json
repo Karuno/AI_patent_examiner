@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "article": "37",
+    "jurisdiction": "JP",
+    "version": "1.6",
+    "compiled_on": "2025-08-24",
+    "source": "JPO審査基準 第II部 第7章 単一性要件（3. 発明の単一性の要件についての判断／4. 審査対象の具体的な決定手順）",
+    "note": "審査基準フローチャート（STF→効率性）を実装。『そのSTFを有する群』の厳密定義を追加し、効率性に基づく追加/除外の判断IDを整備。case_digestが判断理由（why）を保持できるよう理由IDカタログを付与。"
+  },
+  "overview": {
+    "purpose": "請求項群が単一の発明と認められるかを、先行技術に対する『特別技術的特徴（STF）』の同一又は対応の有無で判断し、審査対象を決定する。",
+    "requires_prior_art": true,
+    "unit_of_analysis": "請求項群（中心発明→発明特定事項の分解）と主要引用例の対比",
+    "cross_refs": [
+      "36_6_1_support",
+      "36_6_2_clarity",
+      "29_1_3_novelty",
+      "29_2_inventive_step"
+    ]
+  },
+  "definitions": {
+    "stf": "先行技術に対して新規であるか、又は進歩性に寄与する技術的特徴（構成・相互関係・作用機序・臨界的数値範囲等）。",
+    "same_or_corresponding": "『同一』は技術的特徴が一致。『対応』は課題が一致・重複又は相補的で、同一の技術的貢献を与える関係。",
+    "stf_group": {
+      "label_jp": "そのSTFを有する群",
+      "meaning": "『STFを有する請求項』を引用（従属）する請求項の集合（直接・間接依存を含む閉包）。複数のSTF根（root claim）があり得る。",
+      "algorithm": [
+        "1) STFを有すると判定された請求項集合 R を得る。",
+        "2) 請求項の依存関係グラフ（有向：上位←下位）を構築する。",
+        "3) 群G = R に対し、各請求項cで『cがR中のいずれかを引用（直接または経由）するか』を再帰探索。満たす c を G に追加。",
+        "4) 複数の根R_iがある場合、各R_iごとに G_i を構成（互いに重複可）。"
+      ]
+    }
+  },
+  "procedures": {
+    "judgment_of_unity": {
+      "section": "3. 発明の単一性の要件についての判断",
+      "flow": [
+        {
+          "node": "J1",
+          "label_jp": "STF候補の抽出",
+          "description": "主要引用例との対比から、先行技術に対する技術的貢献を与える差分（STF候補）を抽出。"
+        },
+        {
+          "node": "J2",
+          "label_jp": "同一又は対応の確認",
+          "description": "請求項群間でSTF候補が同一又は対応かを確認。"
+        },
+        {
+          "node": "J3",
+          "label_jp": "結論",
+          "description": "共通のSTF（同一又は対応）がある群＝単一、なければ非単一（群分け）。"
+        }
+      ]
+    },
+    "target_selection": {
+      "section": "4. 審査対象の具体的な決定手順",
+      "stf_based": {
+        "flowchart_like": true,
+        "steps": [
+          {
+            "step": "T1",
+            "text": "請求項1（原則：特許請求の範囲の最初）に記載された発明はSTFを有するか。"
+          },
+          {
+            "step": "T2",
+            "text": "T1でSTFなしの場合、請求項1の発明特定事項を全て含む同一カテゴリの発明（下位請求）にSTFがあるか。"
+          },
+          {
+            "step": "T3",
+            "text": "T2でSTFなしの場合、更に下位（直前の判定対象の発明特定事項を全て含む同一カテゴリの発明）の中でSTFがあるか。"
+          },
+          {
+            "step": "T4",
+            "text": "いずれかでSTFありとなった時点で、その請求項および『そのSTFを有する群』を審査対象とする。"
+          },
+          {
+            "step": "T5",
+            "text": "（結果）それまでにSTFの有無を判定した発明も審査対象に含める。"
+          }
+        ]
+      },
+      "efficiency_based": {
+        "principle": "審査の効率性に基づき、STF群に加えて審査対象を適切に拡張する。",
+        "additions_examples": [
+          "請求項1の発明特定事項を全て含む同一カテゴリの請求項",
+          "表現のみの差異等、実質同一の発明",
+          "周知慣用の付加・削除で実質が変わらない請求項"
+        ],
+        "exclusions": [
+          "請求項1と課題関連性が低いもの",
+          "請求項1と技術関連性が低いもの"
+        ],
+        "notes": [
+          "効率性追加は審査便宜のためであり、単一性の結論とは独立に運用する。",
+          "追加・除外の判断はログ（理由ID）に残す。"
+        ]
+      }
+    }
+  },
+  "evidence_requirements": [
+    "請求項→引用文献の対応表（段落/図/請求項などの記載箇所まで）",
+    "相違点一覧（STF候補の明示）",
+    "STF同一/対応の根拠（課題・機序・効果等の整合）"
+  ],
+  "reason_catalog": [
+    {
+      "id": "stf_same",
+      "label_jp": "STFが同一である"
+    },
+    {
+      "id": "stf_corresponding",
+      "label_jp": "STFが対応関係にある（課題の一致/重複/相補、同一の技術的貢献）"
+    },
+    {
+      "id": "stf_not_common",
+      "label_jp": "共通STFが見出せない"
+    },
+    {
+      "id": "eff_addition",
+      "label_jp": "効率性に基づく追加対象と判断"
+    },
+    {
+      "id": "eff_exclude_low_problem_relatedness",
+      "label_jp": "請求項1との課題関連性が低いため効率性追加から除外"
+    },
+    {
+      "id": "eff_exclude_low_technical_relatedness",
+      "label_jp": "請求項1との技術関連性が低いため効率性追加から除外"
+    }
+  ],
+  "judgment_catalog": [
+    {
+      "id": "unity_common_stf_present",
+      "label_jp": "共通の特別技術的特徴（STF）が群内に存在する（単一性あり）",
+      "requires_prior_art": true,
+      "tests": [
+        "主要引用例との対比で抽出したSTF候補が請求群で同一又は対応である",
+        "共通STFが先行技術に対し同一の技術的貢献を与える",
+        "明細書の発明の詳細な説明とSTFの位置付けが整合"
+      ],
+      "report_fields": [
+        "reasons",
+        "stf_summary",
+        "root_claims",
+        "stf_groups"
+      ]
+    },
+    {
+      "id": "unity_common_stf_absent",
+      "label_jp": "共通の特別技術的特徴（STF）を欠く（単一性欠如）",
+      "requires_prior_art": true,
+      "tests": [
+        "請求群間でSTF候補が一致せず、先行技術に対する技術的貢献が異なる",
+        "用途のみ共通等で、構成・機序等の貢献が共通していない"
+      ],
+      "report_fields": [
+        "reasons"
+      ]
+    },
+    {
+      "id": "unity_efficiency_target_selection",
+      "label_jp": "審査の効率性に基づく審査対象の決定（追加）",
+      "requires_prior_art": true,
+      "tests": [
+        "請求項1の発明特定事項を全て含む同カテゴリ請求項、表現差のみの請求項、周知の付加/削除等で実質同一といえる請求項を追加するのが合理的"
+      ],
+      "report_fields": [
+        "reasons",
+        "added_claims"
+      ]
+    },
+    {
+      "id": "unity_efficiency_exclude_low_problem_relatedness",
+      "label_jp": "効率性追加からの除外（請求項1との課題関連性が低い）",
+      "requires_prior_art": true,
+      "tests": [
+        "請求項1と課題の関連性が低い（課題が異なる、又は独立しており共通の技術的貢献に寄与しない）"
+      ],
+      "report_fields": [
+        "reasons",
+        "excluded_claims"
+      ]
+    },
+    {
+      "id": "unity_efficiency_exclude_low_technical_relatedness",
+      "label_jp": "効率性追加からの除外（請求項1との技術関連性が低い）",
+      "requires_prior_art": true,
+      "tests": [
+        "請求項1と技術的関連性が低い（構成・機序・技術分野が大きく異なり相互の検討が非効率）"
+      ],
+      "report_fields": [
+        "reasons",
+        "excluded_claims"
+      ]
+    }
+  ],
+  "middle_block_kinds_for_nrr": {
+    "stf_based": [
+      "引用文献の記載事項の認定（記載箇所の特定を含む）",
+      "本願請求項（中心発明）の認定（必要に応じて解釈の提示）",
+      "対比と相違点の抽出（STF候補の明示）",
+      "群内共通性の検討（同一/対応・技術的貢献の同一性）",
+      "小括（単一/非単一）"
+    ],
+    "efficiency_based": [
+      "代表請求項・代表文献の設定理由",
+      "代表対比の結果（記載事項・相違点・STF候補）",
+      "代表結果の群全体への当てはめ根拠",
+      "効率性追加・除外の内訳（理由ID付き）",
+      "小括（審査対象の決定）"
+    ]
+  }
+}

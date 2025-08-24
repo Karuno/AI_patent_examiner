@@ -1,352 +1,229 @@
 {
-  "schema": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "case_digest_schema",
-    "version": "2.0-draft",
-    "generated_on": "2025-08-21",
-    "type": "object",
-    "required": [
-      "meta",
-      "case_id",
-      "application",
-      "prior_arts",
-      "reason_blocks"
-    ],
-    "properties": {
-      "meta": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Case Digest Unified Schema",
+  "description": "統合版 case_digest スキーマ v2. 条文ごとの判断結論と理由・根拠を請求項単位で保持する。",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "compiled_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "compiled_on"
+      ]
+    },
+    "application": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "app-num": {
+          "type": "string"
+          }
+        },      
+      "required": [
+        "app-num"
+      ]
+    },
+    "prior_arts": {
+      "type": "array",
+      "items": {
         "type": "object",
-        "required": [
-          "schema_version",
-          "generated_on",
-          "source"
-        ],
         "properties": {
-          "schema_version": {
+          "id": {
             "type": "string"
           },
-          "generated_on": {
+          "doc_id": {
+            "type": "string"
+          },
+          "extracts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "loc": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "loc"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "doc_id"
+        ]
+      }
+    },
+    "conclusions": {
+      "type": "array",
+      "description": "請求項ごとの条文別結論。reject/allowと判断理由を保持。",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "article": {
+            "type": "string"
+          },
+          "decision": {
             "type": "string",
-            "format": "date"
+            "enum": [
+              "reject",
+              "allow"
+            ]
           },
-          "source": {
+          "judgments": {
+            "type": "array",
+            "description": "判断要素（類型・根拠）",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "criteria_json に対応する judgment_id"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "supporting_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ref_id": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "object",
+                        "properties": {
+                          "doc_id": {
+                            "type": "string"
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "loc": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "loc"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "doc_id"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "ref_id",
+                      "description"
+                    ]
+                  }
+                },
+                "why_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "summary"
+              ]
+            }
+          },
+          "main_prior_art": {
             "type": "string"
+          },
+          "secondary_priors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rationale_type": {
+            "type": "string",
+            "description": "進歩性判断の論理付け類型"
+          },
+          "article_specific": {
+            "type": "object",
+            "properties": {
+              "support_type": {
+                "type": "string",
+                "description": "36条サポート要件の類型(1)(3)(4)"
+              },
+              "support_type3_context": {
+                "type": "object",
+                "properties": {
+                  "technical_field": {
+                    "type": "string"
+                  },
+                  "common_general_knowledge": {
+                    "type": "string"
+                  }
+                }
+              },
+              "support_type4_context": {
+                "type": "object",
+                "properties": {
+                  "recognized_problem": {
+                    "type": "string"
+                  },
+                  "recognized_means": {
+                    "type": "string"
+                  },
+                  "why_not_reflected": {
+                    "type": "string"
+                  }
+                }
+              },
+              "clarity_type": {
+                "type": "string",
+                "description": "36条明確性の判断類型(1)-(5)"
+              }
+            }
           },
           "notes": {
             "type": "string"
           }
-        }
-      },
-      "case_id": {
-        "type": "string"
-      },
-      "application": {
-        "type": "object",
+        },
         "required": [
-          "title"
-        ],
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "claims_all": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "claim_of_focus": {
-            "type": "integer"
-          },
-          "claim_texts": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "feature_breakdown": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": [
-            "symbol",
-            "text"
-          ],
-          "properties": {
-            "symbol": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "prior_arts": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": [
-            "id",
-            "citation"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "citation": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string",
-              "enum": [
-                "patent",
-                "paper",
-                "web",
-                "catalog",
-                "other"
-              ]
-            },
-            "extracts": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "required": [
-                  "loc",
-                  "text"
-                ],
-                "properties": {
-                  "loc": {
-                    "type": "string"
-                  },
-                  "text": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "clarity": {
-        "type": "object",
-        "required": [
-          "claims",
-          "issue",
-          "basis"
-        ],
-        "properties": {
-          "claims": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "issue": {
-            "type": "string"
-          },
-          "basis": {
-            "type": "string"
-          },
-          "quotes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "reason_blocks": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": [
-            "order",
-            "reason_type",
-            "title",
-            "middle_blocks"
-          ],
-          "properties": {
-            "order": {
-              "type": "integer"
-            },
-            "reason_type": {
-              "type": "string",
-              "enum": [
-                "unity",
-                "support",
-                "clarity",
-                "novelty_inventive_step",
-                "inventive_step"
-              ]
-            },
-            "title": {
-              "type": "string"
-            },
-            "middle_blocks": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "required": [
-                  "block_id",
-                  "claim_set",
-                  "prior_art_set",
-                  "steps"
-                ],
-                "properties": {
-                  "block_id": {
-                    "type": "string"
-                  },
-                  "claim_set": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    }
-                  },
-                  "prior_art_set": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "steps": {
-                    "type": "object",
-                    "required": [
-                      "prior_art_finding",
-                      "comparison",
-                      "difference",
-                      "difference_assessment"
-                    ],
-                    "properties": {
-                      "claim_interpretation": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
-                      "prior_art_finding": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "required": [
-                            "art",
-                            "loc",
-                            "text"
-                          ],
-                          "properties": {
-                            "art": {
-                              "type": "string"
-                            },
-                            "loc": {
-                              "type": "string"
-                            },
-                            "text": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "comparison": {
-                        "type": "string"
-                      },
-                      "difference": {
-                        "type": "string"
-                      },
-                      "secondary_findings": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "required": [
-                            "art",
-                            "loc",
-                            "text"
-                          ],
-                          "properties": {
-                            "art": {
-                              "type": "string"
-                            },
-                            "loc": {
-                              "type": "string"
-                            },
-                            "text": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      },
-                      "difference_assessment": {
-                        "type": "string"
-                      },
-                      "mini_conclusion": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "additional_small_blocks": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "type",
-                        "claims",
-                        "text"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "same_as",
-                            "short_explanation"
-                          ]
-                        },
-                        "claims": {
-                          "type": "array",
-                          "items": {
-                            "type": "integer"
-                          }
-                        },
-                        "text": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "block_conclusion": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "reason_conclusion": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "final_notes": {
-        "type": "object",
-        "properties": {
-          "non_rejected_claims": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "prior_art_list_hint": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
+          "claim",
+          "article",
+          "decision"
+        ]
       }
     }
-  }
+  },
+  "required": [
+    "meta",
+    "application",
+    "prior_arts",
+    "conclusions"
+  ]
 }
